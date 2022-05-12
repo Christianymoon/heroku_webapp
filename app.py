@@ -6,8 +6,8 @@ import os
 app = Flask(__name__)
 
 #path_new = os.chdir(os.getcwd() + "\\Hacking\\host")
-
-app.config["UPLOAD_FOLDER"] = "./Upload"
+mydir = os.path.dirname(__file__)
+app.config["UPLOAD_FOLDER"] = "/Upload"
 
 @app.route("/")
 
@@ -20,7 +20,7 @@ def upload():
     if request.method == "POST":
         f = request.files["archivo"]
         filename = secure_filename(f.filename)
-        f.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+        f.save(os.path.join(mydir + app.config['UPLOAD_FOLDER']))
 
         return "<h1>Archivo subido exitosamente</h1>"
 
